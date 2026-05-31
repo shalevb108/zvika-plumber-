@@ -60,7 +60,7 @@ export default function Footer() {
           <h3>צור קשר</h3>
           <div className={styles.contactItem}>
             <PhoneOutlined className={styles.icon} />
-            <a href="tel:050-1234567">050-1234567</a>
+            <a href="tel:054-775-5054">054-775-5054</a>
           </div>
           <div className={styles.contactItem}>
             <MailOutlined className={styles.icon} />

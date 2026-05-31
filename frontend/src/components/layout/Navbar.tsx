@@ -60,9 +60,9 @@ export default function Navbar() {
           </ul>
 
           <div className={styles.actions}>
-            <a href="tel:050-1234567" className={styles.phoneBtn}>
+            <a href="tel:054-775-5054" className={styles.phoneBtn}>
               <PhoneOutlined />
-              050-1234567
+              054-775-5054
             </a>
             <button className={styles.menuBtn} onClick={() => setDrawerOpen(true)}>
               <MenuOutlined />
@@ -95,9 +95,9 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-        <a href="tel:050-1234567" className={styles.drawerPhone}>
+        <a href="tel:054-775-5054" className={styles.drawerPhone}>
           <PhoneOutlined />
-          050-1234567
+          054-775-5054
         </a>
       </Drawer>
     </>

@@ -109,7 +109,7 @@ export interface ISiteInfo extends Document {
 }
 
 const SiteInfoSchema = new Schema<ISiteInfo>({
-  phone: { type: String, default: '050-1234567' },
+  phone: { type: String, default: '054-775-5054' },
   whatsapp: { type: String, default: '972501234567' },
   email: { type: String, default: 'zvika@plumber.co.il' },
   address: { type: String, default: 'אשקלון, ישראל' },

@@ -56,7 +56,7 @@ export default function Services() {
               </div>
               <h3>{s.title}</h3>
               <p>{s.description}</p>
-              <a href="tel:050-1234567" className={styles.callBtn}>
+              <a href="tel:054-775-5054" className={styles.callBtn}>
                 <PhoneOutlined /> התקשר לפרטים
               </a>
             </div>
@@ -66,8 +66,8 @@ export default function Services() {
 
       <section className={styles.cta}>
         <h2>זקוקים לשירות מיידי?</h2>
-        <a href="tel:050-1234567">
-          <PhoneOutlined /> 050-1234567 - התקשר עכשיו
+        <a href="tel:054-775-5054">
+          <PhoneOutlined /> 054-775-5054 - התקשר עכשיו
         </a>
       </section>
     </>

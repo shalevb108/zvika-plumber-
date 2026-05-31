@@ -37,7 +37,7 @@ export default function Contact() {
         <div className={styles.grid}>
           <div className={styles.infoCol}>
             {[
-              { icon: <PhoneOutlined />, label: 'טלפון', content: <a href="tel:050-1234567">050-1234567</a> },
+              { icon: <PhoneOutlined />, label: 'טלפון', content: <a href="tel:054-775-5054">054-775-5054</a> },
               { icon: <MailOutlined />, label: 'אימייל', content: <a href="mailto:zvika@plumber.co.il">zvika@plumber.co.il</a> },
               { icon: <EnvironmentOutlined />, label: 'כתובת', content: <p>אשקלון, ישראל</p> },
               { icon: <ClockCircleOutlined />, label: 'שעות פעילות', content: <><p>ראשון-חמישי: 07:00-20:00</p><p>שישי: 07:00-14:00</p><p style={{ color: '#1565C0', fontWeight: 700, marginTop: 4 }}>חירום: 24/7</p></> },
@@ -77,7 +77,7 @@ export default function Contact() {
                   { pattern: /^[0-9\-+\s]{9,15}$/, message: 'מספר טלפון לא תקין' },
                 ]}
               >
-                <Input placeholder="050-1234567" type="tel" />
+                <Input placeholder="054-775-5054" type="tel" />
               </Form.Item>
 
               <Form.Item

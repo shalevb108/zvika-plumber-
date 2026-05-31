@@ -60,7 +60,7 @@ export default function Home() {
             שירות אינסטלציה מהיר, אמין ומקצועי באשקלון וכל אזור הדרום. זמינים 24/7 לתקלות דחופות.
           </p>
           <div className={styles.heroActions}>
-            <a href="tel:050-1234567" className={styles.heroBtnPrimary}>
+            <a href="tel:054-775-5054" className={styles.heroBtnPrimary}>
               <PhoneOutlined /> התקשר עכשיו
             </a>
             <button className={styles.heroBtnSecondary} onClick={() => navigate('/services')}>
@@ -199,8 +199,8 @@ export default function Home() {
           <p>
             זמינים 24 שעות ביממה, 7 ימים בשבוע. התקשר ונגיע אליך מהר!
           </p>
-          <a href="tel:050-1234567" className={styles.ctaBtn}>
-            <PhoneOutlined /> <ClockCircleOutlined /> 050-1234567
+          <a href="tel:054-775-5054" className={styles.ctaBtn}>
+            <PhoneOutlined /> <ClockCircleOutlined /> 054-775-5054
           </a>
         </div>
       </section>

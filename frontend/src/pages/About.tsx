@@ -9,7 +9,7 @@ import { getSiteInfo } from '../services/api';
 import styles from './About.module.scss';
 
 const defaultInfo: SiteInfo = {
-  phone: '050-1234567',
+  phone: '054-775-5054',
   whatsapp: '972501234567',
   email: 'zvika@plumber.co.il',
   address: 'אשקלון, ישראל',
