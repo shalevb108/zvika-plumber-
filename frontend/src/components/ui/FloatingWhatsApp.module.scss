@@ -3,10 +3,9 @@
 .wrapper {
   position: fixed;
   bottom: 20px;
-  left: 0px;
+  left: 20px;
   z-index: 999;
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
   gap: $spacing-sm;
 
