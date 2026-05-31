@@ -10,7 +10,7 @@ import styles from './About.module.scss';
 
 const defaultInfo: SiteInfo = {
   phone: '054-775-5054',
-  whatsapp: '972501234567',
+  whatsapp: '972547755054',
   email: 'zvika@plumber.co.il',
   address: 'אשקלון, ישראל',
   city: 'אשקלון',
@@ -41,7 +41,7 @@ export default function About() {
       <section className={styles.bio}>
         <div className={styles.bioGrid}>
           <div className={styles.bioImage}>
-            <div className={styles.avatar}>זס</div>
+            <div className={styles.avatar}>צס</div>
             <h2>צביקה סופר</h2>
             <p className={styles.role}>אינסטלטור מוסמך ומורשה</p>
             <div className={styles.badges}>

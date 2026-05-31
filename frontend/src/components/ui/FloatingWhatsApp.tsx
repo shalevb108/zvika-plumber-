@@ -5,7 +5,7 @@ export default function FloatingWhatsApp() {
     <div className={`${styles.wrapper} ${styles.container}`}>
       <span className={styles.tooltip}>שלח הודעה בוואטסאפ</span>
       <a
-        href="https://wa.me/972501234567?text=שלום%20צביקה%2C%20אני%20מעוניין%20בשירות%20אינסטלציה"
+        href="https://wa.me/972547755054?text=שלום%20צביקה%2C%20אני%20מעוניין%20בשירות%20אינסטלציה"
         target="_blank"
         rel="noopener noreferrer"
         className={styles.btn}
