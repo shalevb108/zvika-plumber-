@@ -1,0 +1,156 @@
+@use '../styles/variables' as *;
+
+.hero {
+  background: linear-gradient(135deg, $primary-dark, $primary);
+  color: $white;
+  padding: 80px 0 60px;
+  text-align: center;
+
+  h1 {
+    font-family: $font-heading;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 900;
+    color: $white;
+    span { color: $accent; }
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: rgba($white, 0.85);
+    margin-top: $spacing-md;
+  }
+}
+
+.section {
+  padding: $spacing-xxl 0;
+  background: $gray-light;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+}
+
+.filterBar {
+  display: flex;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+  margin-bottom: $spacing-xl;
+  justify-content: center;
+}
+
+.filterBtn {
+  padding: 8px 20px;
+  border-radius: 50px;
+  border: 2px solid $primary;
+  background: $white;
+  color: $primary;
+  font-weight: 600;
+  cursor: pointer;
+  transition: $transition;
+  font-size: 0.9rem;
+
+  &.active, &:hover {
+    background: $primary;
+    color: $white;
+  }
+}
+
+.masonry {
+  columns: 3;
+  column-gap: $spacing-lg;
+
+  @media (max-width: $desktop) { columns: 2; }
+  @media (max-width: $tablet) { columns: 1; }
+}
+
+.item {
+  break-inside: avoid;
+  margin-bottom: $spacing-lg;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  background: $white;
+  box-shadow: $shadow-sm;
+
+  &:hover .overlay {
+    opacity: 1;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+
+  img {
+    width: 100%;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+}
+
+.placeholder {
+  width: 100%;
+  background: linear-gradient(135deg, $gray-mid, $gray-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $gray-dark;
+  font-size: 2.5rem;
+  aspect-ratio: 4/3;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba($primary, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: $transition;
+  padding: $spacing-md;
+  text-align: center;
+
+  h3 {
+    color: $white;
+    font-family: $font-heading;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  p {
+    color: rgba($white, 0.85);
+    font-size: 0.85rem;
+  }
+}
+
+.modal {
+  :global(.ant-modal-content) {
+    padding: 0;
+    overflow: hidden;
+    border-radius: $radius-lg;
+  }
+
+  img {
+    width: 100%;
+    display: block;
+  }
+
+  .modalInfo {
+    padding: $spacing-lg;
+    h3 {
+      font-family: $font-heading;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+    p {
+      color: $gray-dark;
+      font-size: 0.9rem;
+    }
+  }
+}

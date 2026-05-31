@@ -1,0 +1,140 @@
+@use '../styles/variables' as *;
+
+.hero {
+  background: linear-gradient(135deg, $primary-dark, $primary);
+  padding: 80px 0 60px;
+  text-align: center;
+
+  h1 {
+    font-family: $font-heading;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 900;
+    color: $white;
+    span { color: $accent; }
+  }
+
+  p { font-size: 1.1rem; color: rgba($white, 0.85); margin-top: $spacing-md; }
+}
+
+.section {
+  padding: $spacing-xxl 0;
+  background: $gray-light;
+}
+
+.grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-lg;
+
+  @media (max-width: $desktop) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: $tablet) { grid-template-columns: 1fr; }
+}
+
+.card {
+  background: $white;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  box-shadow: $shadow-sm;
+  transition: $transition;
+  border: 2px solid transparent;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-md;
+    border-color: rgba($primary, 0.2);
+  }
+
+  .stars {
+    color: #ffc107;
+    font-size: 1.1rem;
+    margin-bottom: $spacing-md;
+  }
+
+  .text {
+    font-size: 0.95rem;
+    color: $text-secondary;
+    line-height: 1.8;
+    margin-bottom: $spacing-lg;
+    font-style: italic;
+    position: relative;
+    padding: 0 $spacing-md;
+
+    &::before {
+      content: '"';
+      position: absolute;
+      right: 0;
+      top: -10px;
+      font-size: 3rem;
+      color: rgba($primary, 0.15);
+      font-family: $font-heading;
+      line-height: 1;
+    }
+  }
+
+  .author {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    border-top: 1px solid $gray-mid;
+    padding-top: $spacing-md;
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, $primary, $primary-light);
+      border-radius: $radius-round;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .info {
+      h4 { font-weight: 700; font-size: 0.95rem; color: $text-primary; margin-bottom: 2px; }
+      span { font-size: 0.8rem; color: $gray-dark; }
+    }
+
+    .date {
+      margin-right: auto;
+      font-size: 0.75rem;
+      color: $gray-dark;
+    }
+  }
+}
+
+.summary {
+  background: $primary;
+  padding: 60px 0;
+  text-align: center;
+  color: $white;
+
+  h2 {
+    font-family: $font-heading;
+    font-size: 2rem;
+    font-weight: 800;
+    color: $white;
+    margin-bottom: $spacing-lg;
+  }
+
+  .sumGrid {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 $spacing-lg;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-lg;
+
+    @media (max-width: $tablet) { grid-template-columns: 1fr; }
+  }
+
+  .sumItem {
+    .num { font-family: $font-heading; font-size: 2.5rem; font-weight: 900; color: $accent; display: block; }
+    .lbl { font-size: 0.85rem; color: rgba($white, 0.8); }
+  }
+}

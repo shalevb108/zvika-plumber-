@@ -1,0 +1,232 @@
+@use '../styles/variables' as *;
+
+.hero {
+  background: linear-gradient(135deg, $primary-dark, $primary);
+  color: $white;
+  padding: 80px 0 60px;
+  text-align: center;
+
+  h1 {
+    font-family: $font-heading;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 900;
+    color: $white;
+    span { color: $accent; }
+  }
+
+  p { font-size: 1.1rem; color: rgba($white, 0.85); margin-top: $spacing-md; }
+}
+
+.bio {
+  padding: $spacing-xxl 0;
+  background: $white;
+}
+
+.bioGrid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 60px;
+  align-items: center;
+
+  @media (max-width: $tablet) {
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+  }
+}
+
+.bioImage {
+  background: linear-gradient(135deg, $primary, $primary-light);
+  border-radius: $radius-xl;
+  padding: 50px 40px;
+  text-align: center;
+  color: $white;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 100px;
+    height: 100px;
+    background: rgba($white, 0.05);
+    border-radius: $radius-round;
+  }
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+    background: rgba($white, 0.2);
+    border-radius: $radius-round;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-heading;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: $white;
+    margin: 0 auto $spacing-md;
+  }
+
+  h2 {
+    font-family: $font-heading;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: $white;
+    margin-bottom: 4px;
+  }
+
+  .role { font-size: 0.95rem; color: rgba($white, 0.8); margin-bottom: $spacing-lg; }
+
+  .badges {
+    display: flex;
+    gap: $spacing-sm;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    background: rgba($white, 0.15);
+    border: 1px solid rgba($white, 0.25);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 0.8rem;
+  }
+}
+
+.bioContent {
+  h2 {
+    font-family: $font-heading;
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 800;
+    color: $text-primary;
+    margin-bottom: $spacing-md;
+    span { color: $accent; }
+  }
+
+  p {
+    font-size: 1rem;
+    color: $text-secondary;
+    line-height: 1.9;
+    margin-bottom: $spacing-md;
+  }
+
+  .credentials {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    margin-top: $spacing-lg;
+  }
+
+  .credItem {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    background: rgba($primary, 0.06);
+    border-radius: $radius-md;
+    border-right: 3px solid $primary;
+
+    .icon { color: $primary; font-size: 1rem; }
+    span { font-size: 0.9rem; color: $text-secondary; }
+  }
+}
+
+.stats {
+  background: $gray-light;
+  padding: $spacing-xxl 0;
+}
+
+.statsGrid {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-lg;
+
+  @media (max-width: $tablet) { grid-template-columns: repeat(2, 1fr); }
+}
+
+.statCard {
+  background: $white;
+  border-radius: $radius-lg;
+  padding: $spacing-xl $spacing-lg;
+  text-align: center;
+  box-shadow: $shadow-sm;
+
+  .num {
+    font-family: $font-heading;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: $primary;
+    display: block;
+  }
+
+  .suf { color: $accent; }
+
+  .lbl {
+    font-size: 0.9rem;
+    color: $gray-dark;
+    display: block;
+    margin-top: 4px;
+  }
+}
+
+.values {
+  padding: $spacing-xxl 0;
+  background: $white;
+}
+
+.valuesGrid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-lg;
+
+  @media (max-width: $desktop) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: $tablet) { grid-template-columns: 1fr; }
+}
+
+.valueCard {
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  border: 2px solid $gray-mid;
+  transition: $transition;
+  text-align: center;
+
+  &:hover {
+    border-color: $primary;
+    box-shadow: $shadow-md;
+    transform: translateY(-4px);
+  }
+
+  .icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, $primary, $primary-light);
+    border-radius: $radius-xl;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto $spacing-md;
+    font-size: 1.5rem;
+    color: $white;
+  }
+
+  h3 {
+    font-family: $font-heading;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: $spacing-sm;
+    color: $text-primary;
+  }
+
+  p { font-size: 0.9rem; color: $gray-dark; line-height: 1.7; }
+}

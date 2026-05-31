@@ -1,0 +1,186 @@
+@use '../../styles/variables' as *;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(10px);
+  box-shadow: $shadow-sm;
+  transition: $transition;
+  direction: rtl;
+
+  &.scrolled {
+    box-shadow: $shadow-md;
+  }
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+  height: 70px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  text-decoration: none;
+  cursor: pointer;
+
+  .logoIcon {
+    width: 42px;
+    height: 42px;
+    background: $primary;
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $white;
+    font-size: 1.2rem;
+  }
+
+  .logoText {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+
+    .name {
+      font-family: $font-heading;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: $primary;
+    }
+
+    .sub {
+      font-size: 0.75rem;
+      color: $gray-dark;
+    }
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+
+  @media (max-width: $desktop) {
+    display: none;
+  }
+}
+
+.navLink {
+  padding: 8px 12px;
+  border-radius: $radius-sm;
+  font-family: $font-body;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: $text-primary;
+  transition: $transition;
+  cursor: pointer;
+  white-space: nowrap;
+
+  &:hover,
+  &.active {
+    color: $primary;
+    background: rgba($primary, 0.08);
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.phoneBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: $accent;
+  color: $white !important;
+  border: none;
+  border-radius: $radius-md;
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: $transition;
+  text-decoration: none;
+
+  &:hover {
+    background: #e06000;
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: $tablet) {
+    display: none;
+  }
+}
+
+.menuBtn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: $primary;
+  cursor: pointer;
+  padding: 4px;
+
+  @media (max-width: $desktop) {
+    display: flex;
+  }
+}
+
+.drawer {
+  direction: rtl;
+}
+
+.drawerNav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  padding: $spacing-md 0;
+}
+
+.drawerLink {
+  padding: 12px $spacing-md;
+  border-radius: $radius-md;
+  font-size: 1rem;
+  font-weight: 500;
+  color: $text-primary;
+  cursor: pointer;
+  transition: $transition;
+  border-bottom: 1px solid $gray-mid;
+
+  &:hover {
+    color: $primary;
+    background: rgba($primary, 0.06);
+  }
+}
+
+.drawerPhone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: $spacing-lg;
+  background: $accent;
+  color: $white;
+  border: none;
+  border-radius: $radius-md;
+  padding: 14px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+}

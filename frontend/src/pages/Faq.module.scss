@@ -1,0 +1,151 @@
+@use '../styles/variables' as *;
+
+.hero {
+  background: linear-gradient(135deg, $primary-dark, $primary);
+  padding: 80px 0 60px;
+  text-align: center;
+
+  h1 {
+    font-family: $font-heading;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 900;
+    color: $white;
+    span { color: $accent; }
+  }
+
+  p { font-size: 1.1rem; color: rgba($white, 0.85); margin-top: $spacing-md; }
+}
+
+.section {
+  padding: $spacing-xxl 0;
+  background: $gray-light;
+}
+
+.layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+  gap: $spacing-xl;
+  align-items: start;
+
+  @media (max-width: $desktop) { grid-template-columns: 1fr; }
+}
+
+.accordion {
+  :global(.ant-collapse) {
+    background: transparent;
+    border: none;
+  }
+
+  :global(.ant-collapse-item) {
+    background: $white;
+    border-radius: $radius-md !important;
+    margin-bottom: $spacing-sm;
+    border: 1px solid $gray-mid !important;
+    overflow: hidden;
+    transition: $transition;
+
+    &:global(.ant-collapse-item-active) {
+      border-color: $primary !important;
+      box-shadow: $shadow-sm;
+    }
+  }
+
+  :global(.ant-collapse-header) {
+    font-family: $font-heading;
+    font-weight: 600;
+    font-size: 1rem;
+    color: $text-primary !important;
+    padding: $spacing-md $spacing-lg !important;
+  }
+
+  :global(.ant-collapse-content-box) {
+    padding: 0 $spacing-lg $spacing-md !important;
+    color: $text-secondary;
+    line-height: 1.8;
+    font-size: 0.95rem;
+  }
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.sideCard {
+  background: $white;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-sm;
+
+  h3 {
+    font-family: $font-heading;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: $spacing-md;
+    padding-bottom: $spacing-sm;
+    border-bottom: 2px solid $accent;
+    display: inline-block;
+  }
+
+  p, li {
+    font-size: 0.9rem;
+    color: $text-secondary;
+    line-height: 1.7;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  li::before {
+    content: '◄ ';
+    color: $accent;
+    font-size: 0.6rem;
+  }
+}
+
+.ctaCard {
+  background: linear-gradient(135deg, $accent, #b34d00);
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  text-align: center;
+  color: $white;
+
+  h3 {
+    font-family: $font-heading;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $white;
+    margin-bottom: $spacing-sm;
+    border: none;
+    padding: 0;
+    display: block;
+  }
+
+  p { color: rgba($white, 0.9); font-size: 0.9rem; margin-bottom: $spacing-md; }
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: $white;
+    color: $accent;
+    border-radius: $radius-md;
+    padding: 10px 20px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: $transition;
+
+    &:hover { transform: translateY(-2px); box-shadow: $shadow-sm; }
+  }
+}

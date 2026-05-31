@@ -1,0 +1,167 @@
+@use '../../styles/variables' as *;
+
+.footer {
+  background: $primary-dark;
+  color: rgba($white, 0.85);
+  direction: rtl;
+  position: relative;
+  overflow: hidden;
+}
+
+.wave {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  line-height: 0;
+
+  svg {
+    width: 100%;
+    height: 60px;
+  }
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px $spacing-lg $spacing-xl;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: $spacing-xl;
+
+  @media (max-width: $desktop) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: $tablet) {
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+  }
+}
+
+.col {
+  h3 {
+    font-family: $font-heading;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $white;
+    margin-bottom: $spacing-md;
+    padding-bottom: $spacing-sm;
+    border-bottom: 2px solid $accent;
+    display: inline-block;
+  }
+}
+
+.brand {
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-md;
+
+    .icon {
+      width: 40px;
+      height: 40px;
+      background: $accent;
+      border-radius: $radius-md;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: $white;
+    }
+
+    .name {
+      font-family: $font-heading;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: $white;
+    }
+  }
+
+  p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: rgba($white, 0.75);
+    max-width: 280px;
+  }
+}
+
+.links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  li {
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: rgba($white, 0.75);
+    transition: $transition;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    &::before {
+      content: '◄';
+      font-size: 0.6rem;
+      color: $accent;
+    }
+
+    &:hover {
+      color: $white;
+      padding-right: 4px;
+    }
+  }
+}
+
+.contactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-sm;
+  font-size: 0.9rem;
+  color: rgba($white, 0.75);
+
+  .icon {
+    color: $accent;
+    font-size: 1rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  a {
+    color: rgba($white, 0.75);
+    transition: $transition;
+
+    &:hover {
+      color: $white;
+    }
+  }
+}
+
+.bottom {
+  border-top: 1px solid rgba($white, 0.1);
+  padding: $spacing-lg $spacing-lg;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: rgba($white, 0.5);
+
+  @media (max-width: $tablet) {
+    flex-direction: column;
+    gap: $spacing-sm;
+    text-align: center;
+  }
+}
+
+.license {
+  background: rgba($white, 0.1);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  color: rgba($white, 0.7);
+}
