@@ -55,11 +55,9 @@ export default function AdminSiteInfo() {
         </Card>
 
         <Card title="נתונים סטטיסטיים" style={{ marginBottom: 24 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '0 24px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 24px' }}>
             <Form.Item name="licenseNumber" label="מספר רישיון"><Input /></Form.Item>
             <Form.Item name="yearsExperience" label="שנות ניסיון"><Input type="number" /></Form.Item>
-            <Form.Item name="projectsCompleted" label="פרויקטים"><Input type="number" /></Form.Item>
-            <Form.Item name="happyClients" label="לקוחות מרוצים"><Input type="number" /></Form.Item>
           </div>
         </Card>
 

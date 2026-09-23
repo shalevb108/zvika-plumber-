@@ -60,6 +60,8 @@ export default function AdminDashboard() {
           bottom: 0,
           zIndex: 100,
           overflow: 'auto',
+          display: 'flex',
+          flexDirection: 'column',
         }}
         trigger={null}
       >
@@ -93,12 +95,12 @@ export default function AdminDashboard() {
           theme="dark"
           mode="inline"
           selectedKeys={[location.pathname]}
-          style={{ background: 'transparent', border: 'none' }}
+          style={{ background: 'transparent', border: 'none', flex: 1 }}
           onClick={({ key }) => navigate(key)}
           items={menuItems}
         />
 
-        <div style={{ padding: '16px', marginTop: 'auto', position: 'absolute', bottom: 60, width: '100%' }}>
+        <div style={{ padding: '16px', marginTop: 'auto' }}>
           <Button
             icon={<HomeOutlined />}
             onClick={() => navigate('/')}

@@ -3,6 +3,7 @@ import { Collapse } from 'antd';
 import { PhoneOutlined } from '@ant-design/icons';
 import type { FaqItem } from '../types';
 import { getFaq } from '../services/api';
+import { useSiteInfo } from '../context/SiteInfoContext';
 import styles from './Faq.module.scss';
 
 const defaults: FaqItem[] = [
@@ -18,6 +19,7 @@ const defaults: FaqItem[] = [
 
 export default function Faq() {
   const [items, setItems] = useState<FaqItem[]>(defaults);
+  const info = useSiteInfo();
 
   useEffect(() => {
     getFaq().then(d => { if (d.length > 0) setItems(d); }).catch(() => {});
@@ -58,8 +60,7 @@ export default function Faq() {
 
             <div className={styles.sideCard}>
               <h3>שעות פעילות</h3>
-              <p>ראשון - חמישי: 07:00 - 20:00</p>
-              <p>שישי: 07:00 - 14:00</p>
+              <p>{info.businessHours}</p>
               <p style={{ marginTop: 8, color: '#1565C0', fontWeight: 600 }}>
                 שירות חירום זמין 24/7!
               </p>
@@ -68,8 +69,8 @@ export default function Faq() {
             <div className={styles.ctaCard}>
               <h3>לא מצאת תשובה?</h3>
               <p>פשוט התקשר אלינו ונשמח לעזור</p>
-              <a href="tel:054-775-5054">
-                <PhoneOutlined /> 054-775-5054
+              <a href={`tel:${info.phone}`}>
+                <PhoneOutlined /> {info.phone}
               </a>
             </div>
           </div>

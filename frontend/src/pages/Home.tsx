@@ -7,6 +7,7 @@ import {
 } from '@ant-design/icons';
 import type { Service, Testimonial } from '../types';
 import { getServices, getTestimonials } from '../services/api';
+import { useSiteInfo } from '../context/SiteInfoContext';
 import styles from './Home.module.scss';
 
 const defaultServices: Service[] = [
@@ -35,8 +36,13 @@ const serviceIcons: Record<string, React.ReactNode> = {
 
 export default function Home() {
   const navigate = useNavigate();
+  const info = useSiteInfo();
   const [services, setServices] = useState<Service[]>(defaultServices);
   const [testimonials, setTestimonials] = useState<Testimonial[]>(defaultTestimonials);
+
+  // heroTitle may be "name - tagline"; show the tagline as the accent line.
+  const [heroMain, ...heroRest] = info.heroTitle.split(' - ');
+  const heroAccent = heroRest.join(' - ');
 
   useEffect(() => {
     getServices().then(d => { if (d.length > 0) setServices(d); }).catch(() => {});
@@ -53,14 +59,14 @@ export default function Home() {
             אינסטלטור מורשה ומוסמך
           </div>
           <h1 className={styles.heroTitle}>
-            צביקה סופר
-            <span>אינסטלטור מקצועי</span>
+            {heroMain}
+            {heroAccent && <span>{heroAccent}</span>}
           </h1>
           <p className={styles.heroSubtitle}>
-            שירות אינסטלציה מהיר, אמין ומקצועי באשקלון וכל אזור הדרום. זמינים 24/7 לתקלות דחופות.
+            {info.heroSubtitle}
           </p>
           <div className={styles.heroActions}>
-            <a href="tel:054-775-5054" className={styles.heroBtnPrimary}>
+            <a href={`tel:${info.phone}`} className={styles.heroBtnPrimary}>
               <PhoneOutlined /> התקשר עכשיו
             </a>
             <button className={styles.heroBtnSecondary} onClick={() => navigate('/services')}>
@@ -74,20 +80,12 @@ export default function Home() {
       <section className={styles.stats}>
         <div className={styles.statsGrid}>
           <div className={styles.statItem}>
-            <span className={styles.statNum}>20<span className={styles.statSuffix}>+</span></span>
+            <span className={styles.statNum}>{info.yearsExperience}<span className={styles.statSuffix}>+</span></span>
             <span className={styles.statLabel}>שנות ניסיון</span>
-          </div>
-          <div className={styles.statItem}>
-            <span className={styles.statNum}>1500<span className={styles.statSuffix}>+</span></span>
-            <span className={styles.statLabel}>פרויקטים הושלמו</span>
           </div>
           <div className={styles.statItem}>
             <span className={styles.statNum}>24<span className={styles.statSuffix}>/7</span></span>
             <span className={styles.statLabel}>זמינות לחירום</span>
-          </div>
-          <div className={styles.statItem}>
-            <span className={styles.statNum}>100<span className={styles.statSuffix}>%</span></span>
-            <span className={styles.statLabel}>לקוחות מרוצים</span>
           </div>
         </div>
       </section>
@@ -119,7 +117,7 @@ export default function Home() {
           <div className={styles.whyContent}>
             <h2>למה לבחור ב<span>צביקה סופר</span>?</h2>
             <p>
-              עם ניסיון של יותר מ-20 שנה בתחום האינסטלציה, אנחנו מספקים שירות שאפשר לסמוך עליו. מהגעה מהירה ועד עבודה מסודרת ונקייה.
+              עם ניסיון של יותר מ-30 שנה בתחום האינסטלציה, אנחנו מספקים שירות שאפשר לסמוך עליו. מהגעה מהירה ועד עבודה מסודרת ונקייה.
             </p>
             <ul className={styles.whyList}>
               {[
@@ -142,17 +140,13 @@ export default function Home() {
             <div className={styles.bigIcon}><ToolOutlined /></div>
             <h3>צביקה סופר - אינסטלטור מוסמך</h3>
             <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.95rem' }}>
-              רישיון אינסטלטור מס׳ 12345<br />
+              רישיון אינסטלטור מס׳ {info.licenseNumber}<br />
               חבר לשכת האינסטלטורים בישראל
             </p>
             <div className={styles.statsInner}>
               <div className={styles.innerStat}>
-                <div className={styles.num}>20+</div>
+                <div className={styles.num}>{info.yearsExperience}+</div>
                 <div className={styles.lbl}>שנות ניסיון</div>
-              </div>
-              <div className={styles.innerStat}>
-                <div className={styles.num}>1500+</div>
-                <div className={styles.lbl}>פרויקטים</div>
               </div>
               <div className={styles.innerStat}>
                 <div className={styles.num}>24/7</div>
@@ -199,8 +193,8 @@ export default function Home() {
           <p>
             זמינים 24 שעות ביממה, 7 ימים בשבוע. התקשר ונגיע אליך מהר!
           </p>
-          <a href="tel:054-775-5054" className={styles.ctaBtn}>
-            <PhoneOutlined /> <ClockCircleOutlined /> 054-775-5054
+          <a href={`tel:${info.phone}`} className={styles.ctaBtn}>
+            <PhoneOutlined /> <ClockCircleOutlined /> {info.phone}
           </a>
         </div>
       </section>

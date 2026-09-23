@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Table, Button, Modal, Form, Input, message, Space, Popconfirm } from 'antd';
+import { useEffect, useState, useRef } from 'react';
+import type { InputRef } from 'antd';
+import { Table, Button, Modal, Form, Input, Select, Divider, message, Space, Popconfirm } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import type { PriceItem } from '../../../types';
 import { getPrices, createPrice, updatePrice, deletePrice } from '../../../services/api';
@@ -10,7 +11,29 @@ export default function AdminPrices() {
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<PriceItem | null>(null);
   const [saving, setSaving] = useState(false);
+  const [newCategory, setNewCategory] = useState('');
+  const [extraCategories, setExtraCategories] = useState<string[]>([]);
+  const categoryInputRef = useRef<InputRef>(null);
   const [form] = Form.useForm();
+
+  const categoryOptions = Array.from(
+    new Set([
+      ...items.map((i) => i.category).filter((c): c is string => !!c),
+      ...extraCategories,
+    ])
+  ).map((c) => ({ label: c, value: c }));
+
+  const addCategory = (e: React.MouseEvent | React.KeyboardEvent) => {
+    e.preventDefault();
+    const name = newCategory.trim();
+    if (!name) return;
+    if (!extraCategories.includes(name) && !items.some((i) => i.category === name)) {
+      setExtraCategories((prev) => [...prev, name]);
+    }
+    form.setFieldValue('category', name);
+    setNewCategory('');
+    setTimeout(() => categoryInputRef.current?.focus(), 0);
+  };
 
   const load = async () => {
     setLoading(true);
@@ -72,7 +95,33 @@ export default function AdminPrices() {
         <Form form={form} layout="vertical" onFinish={onSave}>
           <Form.Item name="service" label="שירות" rules={[{ required: true }]}><Input /></Form.Item>
           <Form.Item name="price" label="מחיר" rules={[{ required: true }]}><Input placeholder="₪200-₪400" /></Form.Item>
-          <Form.Item name="category" label="קטגוריה"><Input /></Form.Item>
+          <Form.Item name="category" label="קטגוריה">
+            <Select
+              showSearch
+              allowClear
+              placeholder="בחר קטגוריה"
+              options={categoryOptions}
+              popupRender={(menu) => (
+                <>
+                  {menu}
+                  <Divider style={{ margin: '8px 0' }} />
+                  <Space style={{ padding: '0 8px 4px' }}>
+                    <Input
+                      placeholder="קטגוריה חדשה"
+                      ref={categoryInputRef}
+                      value={newCategory}
+                      onChange={(e) => setNewCategory(e.target.value)}
+                      onKeyDown={(e) => { if (e.key === 'Enter') addCategory(e); }}
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                    <Button type="text" icon={<PlusOutlined />} onClick={addCategory}>
+                      הוסף
+                    </Button>
+                  </Space>
+                </>
+              )}
+            />
+          </Form.Item>
           <Form.Item name="note" label="הערה"><Input /></Form.Item>
           <Form.Item name="order" label="סדר"><Input type="number" /></Form.Item>
         </Form>

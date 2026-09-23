@@ -6,6 +6,7 @@ import {
 } from '@ant-design/icons';
 import type { Service } from '../types';
 import { getServices } from '../services/api';
+import { useSiteInfo } from '../context/SiteInfoContext';
 import styles from './Services.module.scss';
 
 const defaults: Service[] = [
@@ -33,6 +34,7 @@ const iconMap: Record<string, React.ReactNode> = {
 
 export default function Services() {
   const [services, setServices] = useState<Service[]>(defaults);
+  const info = useSiteInfo();
 
   useEffect(() => {
     getServices().then(d => { if (d.length > 0) setServices(d); }).catch(() => {});
@@ -56,7 +58,7 @@ export default function Services() {
               </div>
               <h3>{s.title}</h3>
               <p>{s.description}</p>
-              <a href="tel:054-775-5054" className={styles.callBtn}>
+              <a href={`tel:${info.phone}`} className={styles.callBtn}>
                 <PhoneOutlined /> התקשר לפרטים
               </a>
             </div>
@@ -66,8 +68,8 @@ export default function Services() {
 
       <section className={styles.cta}>
         <h2>זקוקים לשירות מיידי?</h2>
-        <a href="tel:054-775-5054">
-          <PhoneOutlined /> 054-775-5054 - התקשר עכשיו
+        <a href={`tel:${info.phone}`}>
+          <PhoneOutlined /> {info.phone} - התקשר עכשיו
         </a>
       </section>
     </>

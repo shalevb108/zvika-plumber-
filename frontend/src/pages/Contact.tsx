@@ -5,6 +5,7 @@ import {
   ClockCircleOutlined, SendOutlined,
 } from '@ant-design/icons';
 import { sendContactMessage } from '../services/api';
+import { useSiteInfo } from '../context/SiteInfoContext';
 import styles from './Contact.module.scss';
 
 const { TextArea } = Input;
@@ -12,6 +13,7 @@ const { TextArea } = Input;
 export default function Contact() {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const info = useSiteInfo();
 
   const onFinish = async (values: { name: string; phone: string; email: string; message: string }) => {
     setLoading(true);
@@ -37,10 +39,10 @@ export default function Contact() {
         <div className={styles.grid}>
           <div className={styles.infoCol}>
             {[
-              { icon: <PhoneOutlined />, label: 'טלפון', content: <a href="tel:054-775-5054">054-775-5054</a> },
-              { icon: <MailOutlined />, label: 'אימייל', content: <a href="mailto:zvika@plumber.co.il">zvika@plumber.co.il</a> },
-              { icon: <EnvironmentOutlined />, label: 'כתובת', content: <p>אשקלון, ישראל</p> },
-              { icon: <ClockCircleOutlined />, label: 'שעות פעילות', content: <><p>ראשון-חמישי: 07:00-20:00</p><p>שישי: 07:00-14:00</p><p style={{ color: '#1565C0', fontWeight: 700, marginTop: 4 }}>חירום: 24/7</p></> },
+              { icon: <PhoneOutlined />, label: 'טלפון', content: <a href={`tel:${info.phone}`}>{info.phone}</a> },
+              { icon: <MailOutlined />, label: 'אימייל', content: <a href={`mailto:${info.email}`}>{info.email}</a> },
+              { icon: <EnvironmentOutlined />, label: 'כתובת', content: <p>{info.address}</p> },
+              { icon: <ClockCircleOutlined />, label: 'שעות פעילות', content: <><p>{info.businessHours}</p><p style={{ color: '#1565C0', fontWeight: 700, marginTop: 4 }}>חירום: 24/7</p></> },
             ].map((item, i) => (
               <div key={i} className={styles.infoCard}>
                 <div className={styles.iconWrap}>{item.icon}</div>
@@ -77,7 +79,7 @@ export default function Contact() {
                   { pattern: /^[0-9\-+\s]{9,15}$/, message: 'מספר טלפון לא תקין' },
                 ]}
               >
-                <Input placeholder="054-775-5054" type="tel" />
+                <Input placeholder={info.phone} type="tel" />
               </Form.Item>
 
               <Form.Item

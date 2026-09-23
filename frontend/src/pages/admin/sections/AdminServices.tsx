@@ -1,8 +1,23 @@
 import { useEffect, useState } from 'react';
-import { Table, Button, Modal, Form, Input, Switch, message, Space, Popconfirm } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Table, Button, Modal, Form, Input, Select, Switch, message, Space, Popconfirm } from 'antd';
+import {
+  PlusOutlined, EditOutlined, DeleteOutlined,
+  ToolOutlined, FireOutlined, HomeOutlined, SearchOutlined,
+  BuildOutlined, ThunderboltOutlined, SafetyCertificateOutlined,
+} from '@ant-design/icons';
 import type { Service } from '../../../types';
 import { getServices, createService, updateService, deleteService } from '../../../services/api';
+
+const iconOptions = [
+  { value: 'tool', label: 'כלי עבודה', icon: <ToolOutlined /> },
+  { value: 'drop', label: 'טיפת מים', icon: <ToolOutlined /> },
+  { value: 'fire', label: 'אש / דוד', icon: <FireOutlined /> },
+  { value: 'home', label: 'בית', icon: <HomeOutlined /> },
+  { value: 'search', label: 'חיפוש / זיהוי נזילות', icon: <SearchOutlined /> },
+  { value: 'build', label: 'בנייה / ריצוף', icon: <BuildOutlined /> },
+  { value: 'thunder', label: 'ברק / חשמל', icon: <ThunderboltOutlined /> },
+  { value: 'safe', label: 'בטיחות / אבטחה', icon: <SafetyCertificateOutlined /> },
+];
 
 export default function AdminServices() {
   const [items, setItems] = useState<Service[]>([]);
@@ -128,8 +143,19 @@ export default function AdminServices() {
           <Form.Item name="description" label="תיאור" rules={[{ required: true }]}>
             <Input.TextArea rows={3} />
           </Form.Item>
-          <Form.Item name="icon" label="אייקון (tool/drop/fire/home/search/build)">
-            <Input />
+          <Form.Item name="icon" label="אייקון">
+            <Select
+              placeholder="בחר אייקון"
+              options={iconOptions.map((o) => ({
+                value: o.value,
+                label: (
+                  <Space>
+                    {o.icon}
+                    {o.label}
+                  </Space>
+                ),
+              }))}
+            />
           </Form.Item>
           <Form.Item name="order" label="סדר">
             <Input type="number" />

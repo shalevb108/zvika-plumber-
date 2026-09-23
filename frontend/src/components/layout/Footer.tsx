@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { PhoneOutlined, MailOutlined, EnvironmentOutlined, ClockCircleOutlined, ToolOutlined } from '@ant-design/icons';
+import { useSiteInfo } from '../../context/SiteInfoContext';
 import styles from './Footer.module.scss';
 
 const navLinks = [
@@ -13,6 +14,7 @@ const navLinks = [
 
 export default function Footer() {
   const navigate = useNavigate();
+  const info = useSiteInfo();
 
   return (
     <footer className={styles.footer}>
@@ -60,26 +62,26 @@ export default function Footer() {
           <h3>צור קשר</h3>
           <div className={styles.contactItem}>
             <PhoneOutlined className={styles.icon} />
-            <a href="tel:054-775-5054">054-775-5054</a>
+            <a href={`tel:${info.phone}`}>{info.phone}</a>
           </div>
           <div className={styles.contactItem}>
             <MailOutlined className={styles.icon} />
-            <a href="mailto:zvika@plumber.co.il">zvika@plumber.co.il</a>
+            <a href={`mailto:${info.email}`}>{info.email}</a>
           </div>
           <div className={styles.contactItem}>
             <EnvironmentOutlined className={styles.icon} />
-            <span>אשקלון, ישראל</span>
+            <span>{info.address}</span>
           </div>
           <div className={styles.contactItem}>
             <ClockCircleOutlined className={styles.icon} />
-            <span>א׳-ה׳ 07:00-20:00<br />ו׳ 07:00-14:00</span>
+            <span>{info.businessHours}</span>
           </div>
         </div>
       </div>
 
       <div className={styles.bottom}>
         <span>© {new Date().getFullYear()} צביקה סופר - כל הזכויות שמורות</span>
-        <span className={styles.license}>רישיון אינסטלציה מס׳ 12345</span>
+        <span className={styles.license}>רישיון אינסטלציה מס׳ {info.licenseNumber}</span>
       </div>
     </footer>
   );

@@ -1,11 +1,17 @@
+import { useSiteInfo } from '../../context/SiteInfoContext';
 import styles from './FloatingWhatsApp.module.scss';
 
 export default function FloatingWhatsApp() {
+  const info = useSiteInfo();
+  const href = `https://wa.me/${info.whatsapp}?text=${encodeURIComponent(
+    'שלום צביקה, אני מעוניין בשירות אינסטלציה'
+  )}`;
+
   return (
     <div className={`${styles.wrapper} ${styles.container}`}>
       <span className={styles.tooltip}>שלח הודעה בוואטסאפ</span>
       <a
-        href="https://wa.me/972547755054?text=שלום%20צביקה%2C%20אני%20מעוניין%20בשירות%20אינסטלציה"
+        href={href}
         target="_blank"
         rel="noopener noreferrer"
         className={styles.btn}

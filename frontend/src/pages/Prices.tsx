@@ -3,6 +3,7 @@ import { Table } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import type { PriceItem } from '../types';
 import { getPrices } from '../services/api';
+import { useSiteInfo } from '../context/SiteInfoContext';
 import styles from './Prices.module.scss';
 
 const defaults: PriceItem[] = [
@@ -50,6 +51,7 @@ export default function Prices() {
   const [prices, setPrices] = useState<PriceItem[]>(defaults);
   const [filter, setFilter] = useState('הכל');
   const [categories, setCategories] = useState(allCategories);
+  const info = useSiteInfo();
 
   useEffect(() => {
     getPrices().then(d => {
@@ -98,7 +100,7 @@ export default function Prices() {
             <div>
               <strong>שימו לב:</strong> המחירים המוצגים הם משוערים בלבד. המחיר הסופי נקבע לאחר ביקור ואבחון בשטח.
               הצעת מחיר מלאה ניתנת לפני תחילת כל עבודה, ללא התחייבות.
-              לפרטים ותיאום: <a href="tel:054-775-5054" style={{ color: '#1565C0', fontWeight: 600 }}>054-775-5054</a>
+              לפרטים ותיאום: <a href={`tel:${info.phone}`} style={{ color: '#1565C0', fontWeight: 600 }}>{info.phone}</a>
             </div>
           </div>
         </div>

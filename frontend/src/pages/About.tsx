@@ -1,35 +1,13 @@
-import { useEffect, useState } from 'react';
 import {
   SafetyCertificateOutlined, StarOutlined, ThunderboltOutlined,
   HeartOutlined, TeamOutlined, ClockCircleOutlined, CheckCircleOutlined,
   TrophyOutlined,
 } from '@ant-design/icons';
-import type { SiteInfo } from '../types';
-import { getSiteInfo } from '../services/api';
+import { useSiteInfo } from '../context/SiteInfoContext';
 import styles from './About.module.scss';
 
-const defaultInfo: SiteInfo = {
-  phone: '054-775-5054',
-  whatsapp: '972547755054',
-  email: 'zvika@plumber.co.il',
-  address: 'אשקלון, ישראל',
-  city: 'אשקלון',
-  businessHours: 'ראשון-חמישי 07:00-20:00, שישי 07:00-14:00',
-  heroTitle: 'צביקה סופר - אינסטלטור מקצועי',
-  heroSubtitle: 'שירות מהיר, אמין ומקצועי באשקלון והדרום',
-  aboutText: 'אני צביקה סופר, אינסטלטור מוסמך עם ניסיון של מעל 20 שנה. מספק שירות מקצועי, אמין ומהיר לבתים, עסקים ומפעלים באשקלון וכל אזור הדרום. אני מאמין שאינסטלטור טוב הוא זה שמגיע בזמן, עובד בנקיון, ומשאיר את הבית מסודר כמו שמצא אותו.',
-  licenseNumber: '12345',
-  yearsExperience: 20,
-  projectsCompleted: 1500,
-  happyClients: 1200,
-};
-
 export default function About() {
-  const [info, setInfo] = useState<SiteInfo>(defaultInfo);
-
-  useEffect(() => {
-    getSiteInfo().then(d => setInfo(d)).catch(() => {});
-  }, []);
+  const info = useSiteInfo();
 
   return (
     <>
@@ -83,8 +61,6 @@ export default function About() {
         <div className={styles.statsGrid}>
           {[
             { num: info.yearsExperience, suf: '+', lbl: 'שנות ניסיון' },
-            { num: info.projectsCompleted, suf: '+', lbl: 'פרויקטים הושלמו' },
-            { num: info.happyClients, suf: '+', lbl: 'לקוחות מרוצים' },
             { num: 24, suf: '/7', lbl: 'זמינות לחירום' },
           ].map((s, i) => (
             <div key={i} className={styles.statCard}>

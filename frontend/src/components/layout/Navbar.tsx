@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Drawer } from 'antd';
 import { MenuOutlined, PhoneOutlined, ToolOutlined, CloseOutlined } from '@ant-design/icons';
+import { useSiteInfo } from '../../context/SiteInfoContext';
 import styles from './Navbar.module.scss';
 
 const navItems = [
@@ -20,6 +21,7 @@ export default function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const info = useSiteInfo();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -60,9 +62,9 @@ export default function Navbar() {
           </ul>
 
           <div className={styles.actions}>
-            <a href="tel:054-775-5054" className={styles.phoneBtn}>
+            <a href={`tel:${info.phone}`} className={styles.phoneBtn}>
               <PhoneOutlined />
-              054-775-5054
+              {info.phone}
             </a>
             <button className={styles.menuBtn} onClick={() => setDrawerOpen(true)}>
               <MenuOutlined />
@@ -95,9 +97,9 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-        <a href="tel:054-775-5054" className={styles.drawerPhone}>
+        <a href={`tel:${info.phone}`} className={styles.drawerPhone}>
           <PhoneOutlined />
-          054-775-5054
+          {info.phone}
         </a>
       </Drawer>
     </>
