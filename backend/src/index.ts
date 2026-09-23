@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import authRoutes from './routes/auth';
 import servicesRoutes from './routes/services';
 import galleryRoutes from './routes/gallery';
+import imagesRoutes from './routes/images';
 import testimonialsRoutes from './routes/testimonials';
 import pricesRoutes from './routes/prices';
 import faqRoutes from './routes/faq';
@@ -38,12 +39,13 @@ app.use(cors({
   credentials: true,
 }));
 
-app.use(express.json());
+app.use(express.json({ limit: '15mb' }));
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/services', servicesRoutes);
 app.use('/api/gallery', galleryRoutes);
+app.use('/api/images', imagesRoutes);
 app.use('/api/testimonials', testimonialsRoutes);
 app.use('/api/prices', pricesRoutes);
 app.use('/api/faq', faqRoutes);

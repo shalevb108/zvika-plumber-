@@ -22,6 +22,16 @@ export const createService = (data: Partial<Service>) => api.post<Service>('/ser
 export const updateService = (id: string, data: Partial<Service>) => api.put<Service>(`/services/${id}`, data).then(r => r.data);
 export const deleteService = (id: string) => api.delete(`/services/${id}`).then(r => r.data);
 
+// Images
+export const uploadImage = (data: string, contentType: string) =>
+  api.post<{ url: string }>('/images', { data, contentType }).then(r => r.data.url);
+
+// Resolve a stored imageUrl to a full URL. Absolute (http/https) and data: URLs pass
+// through unchanged; relative API paths (/api/images/<id>) are prefixed with the API host.
+const apiOrigin = (import.meta.env.VITE_API_URL || '/api').replace(/\/api\/?$/, '');
+export const resolveImageUrl = (u?: string) =>
+  !u ? '' : /^(https?:|data:)/.test(u) ? u : `${apiOrigin}${u}`;
+
 // Gallery
 export const getGallery = () => api.get<GalleryItem[]>('/gallery').then(r => r.data);
 export const createGalleryItem = (data: Partial<GalleryItem>) => api.post<GalleryItem>('/gallery', data).then(r => r.data);

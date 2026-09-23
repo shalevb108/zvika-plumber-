@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Button, Modal, Form, Input, message, Popconfirm, Card } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined, PictureOutlined } from '@ant-design/icons';
+import { Button, Modal, Form, Input, message, Popconfirm, Card, Upload } from 'antd';
+import { PlusOutlined, EditOutlined, DeleteOutlined, PictureOutlined, UploadOutlined } from '@ant-design/icons';
 import type { GalleryItem } from '../../../types';
-import { getGallery, createGalleryItem, updateGalleryItem, deleteGalleryItem } from '../../../services/api';
+import { getGallery, createGalleryItem, updateGalleryItem, deleteGalleryItem, uploadImage, resolveImageUrl } from '../../../services/api';
+import { compressImage } from '../../../utils/image';
 
 export default function AdminGallery() {
   const [items, setItems] = useState<GalleryItem[]>([]);
@@ -10,7 +11,25 @@ export default function AdminGallery() {
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<GalleryItem | null>(null);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [preview, setPreview] = useState('');
   const [form] = Form.useForm();
+
+  const handleUpload = async (file: File) => {
+    setUploading(true);
+    try {
+      const { data, contentType } = await compressImage(file);
+      const url = await uploadImage(data, contentType);
+      form.setFieldValue('imageUrl', url);
+      setPreview(resolveImageUrl(url));
+      message.success('התמונה הועלתה');
+    } catch {
+      message.error('שגיאה בהעלאת התמונה');
+    } finally {
+      setUploading(false);
+    }
+    return false; // prevent antd's default upload
+  };
 
   const load = async () => {
     setLoading(true);
@@ -22,12 +41,14 @@ export default function AdminGallery() {
   const openCreate = () => {
     setEditing(null);
     form.resetFields();
+    setPreview('');
     setModalOpen(true);
   };
 
   const openEdit = (item: GalleryItem) => {
     setEditing(item);
     form.setFieldsValue(item);
+    setPreview(resolveImageUrl(item.imageUrl));
     setModalOpen(true);
   };
 
@@ -60,7 +81,7 @@ export default function AdminGallery() {
               key={item._id}
               cover={
                 item.imageUrl
-                  ? <img src={item.imageUrl} alt={item.title} style={{ height: 160, objectFit: 'cover' }} />
+                  ? <img src={resolveImageUrl(item.imageUrl)} alt={item.title} style={{ height: 160, objectFit: 'cover' }} />
                   : <div style={{ height: 160, background: 'linear-gradient(135deg, #1565C0, #1976D2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem', color: 'rgba(255,255,255,0.3)' }}><PictureOutlined /></div>
               }
               actions={[
@@ -88,8 +109,27 @@ export default function AdminGallery() {
         destroyOnClose
       >
         <Form form={form} layout="vertical" onFinish={onSave}>
-          <Form.Item name="imageUrl" label="קישור לתמונה">
-            <Input placeholder="https://..." />
+          <Form.Item label="תמונה">
+            {preview && (
+              <img
+                src={preview}
+                alt="תצוגה מקדימה"
+                style={{ width: '100%', maxHeight: 200, objectFit: 'cover', borderRadius: 8, marginBottom: 8 }}
+              />
+            )}
+            <Upload
+              accept="image/*"
+              maxCount={1}
+              showUploadList={false}
+              beforeUpload={handleUpload}
+            >
+              <Button icon={<UploadOutlined />} loading={uploading}>
+                {preview ? 'החלף תמונה' : 'העלה תמונה מהמכשיר'}
+              </Button>
+            </Upload>
+          </Form.Item>
+          <Form.Item name="imageUrl" label="או הדבק קישור לתמונה">
+            <Input placeholder="https://..." onChange={(e) => setPreview(resolveImageUrl(e.target.value))} />
           </Form.Item>
           <Form.Item name="title" label="כותרת">
             <Input />

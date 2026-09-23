@@ -36,6 +36,18 @@ const GallerySchema = new Schema<IGalleryItem>({
 
 export const GalleryItem = mongoose.model<IGalleryItem>('GalleryItem', GallerySchema);
 
+export interface IGalleryImage extends Document {
+  data: Buffer;
+  contentType: string;
+}
+
+const GalleryImageSchema = new Schema<IGalleryImage>({
+  data: { type: Buffer, required: true },
+  contentType: { type: String, required: true },
+}, { timestamps: true });
+
+export const GalleryImage = mongoose.model<IGalleryImage>('GalleryImage', GalleryImageSchema);
+
 export interface ITestimonial extends Document {
   name: string;
   text: string;

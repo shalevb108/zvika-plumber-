@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Modal } from 'antd';
 import { PictureOutlined, CloseOutlined } from '@ant-design/icons';
 import type { GalleryItem } from '../types';
-import { getGallery } from '../services/api';
+import { getGallery, resolveImageUrl } from '../services/api';
 import styles from './Gallery.module.scss';
 
 const defaults: GalleryItem[] = [
@@ -64,7 +64,7 @@ export default function Gallery() {
             {filtered.map((item, idx) => (
               <div key={item._id} className={styles.item} onClick={() => setSelected(item)}>
                 {item.imageUrl ? (
-                  <img src={item.imageUrl} alt={item.title} loading="lazy" />
+                  <img src={resolveImageUrl(item.imageUrl)} alt={item.title} loading="lazy" />
                 ) : (
                   <div
                     className={styles.placeholder}
@@ -95,7 +95,7 @@ export default function Gallery() {
         {selected && (
           <>
             {selected.imageUrl ? (
-              <img src={selected.imageUrl} alt={selected.title} />
+              <img src={resolveImageUrl(selected.imageUrl)} alt={selected.title} />
             ) : (
               <div style={{
                 height: 300,
